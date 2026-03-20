@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twibbon Idul Fitri 1447H – PO. Sutan Raya</title>
+
+    <!-- SEO -->
+    <meta name="description" content="Rayakan Idul Fitri 1447H bersama PO. Sutan Raya! Buat twibbon kamu sendiri dengan foto pribadi. Gratis, mudah, dan bisa langsung diunduh.">
+    <meta name="keywords" content="twibbon idul fitri, twibbon lebaran, sutan raya, PO sutan raya, twibbon generator, 1447H">
+    <meta name="author" content="SutanRaya.com">
+    <link rel="canonical" href="https://sutanraya.com/twibbon/twibbon.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sutanraya.com/twibbon/twibbon.html">
+    <meta property="og:title" content="Twibbon Idul Fitri 1447H – PO. Sutan Raya">
+    <meta property="og:description" content="Rayakan Idul Fitri 1447H bersama PO. Sutan Raya! Buat twibbon kamu sendiri dengan foto pribadi. Gratis, mudah, dan bisa langsung diunduh.">
+    <meta property="og:image" content="https://sutanraya.com/twibbon/Twibbon.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1080">
+    <meta property="og:image:height" content="1080">
+    <meta property="og:image:alt" content="Frame Twibbon Idul Fitri 1447H PO. Sutan Raya">
+    <meta property="og:locale" content="id_ID">
+    <meta property="og:site_name" content="SutanRaya.com">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Twibbon Idul Fitri 1447H – PO. Sutan Raya">
+    <meta name="twitter:description" content="Rayakan Idul Fitri 1447H bersama PO. Sutan Raya! Buat twibbon kamu sendiri. Gratis dan langsung diunduh.">
+    <meta name="twitter:image" content="https://sutanraya.com/twibbon/Twibbon.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        'sr-green-dark': '#1a4332',
+                        'sr-green-mid': '#2c6e49',
+                        'sr-gold': '#d4af37',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles for canvas and UI elements */
+        #twibbonCanvas {
+            max-width: 100%;
+            height: auto;
+            /* aspect-ratio dihapus dari sini, akan di-set dinamis via JS mengikuti PNG */
+            background-color: #f3f4f6;
+            cursor: move; 
+            touch-action: none; 
+        }
+        /* Style for slider range */
+        input[type=range]::-webkit-slider-thumb {
+            background: #d4af37;
+        }
+        input[type=range]::-moz-range-thumb {
+            background: #d4af37;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans leading-normal">
+
+    <header class="bg-white border-b border-gray-100 shadow-sm sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-2 text-center">
+                <span class="text-2xl font-bold text-sr-green-dark">Sutan<span class="text-sr-green-mid">Raya</span>.com</span>
+                <!-- <span class="text-xs text-sr-green-mid bg-green-100 px-2 py-0.5 rounded-full">Lebaran</span> -->
+            </div>
+            <span class="text-sm font-medium text-gray-600 hidden sm:block">Twibbon Generator</span>
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+
+            <div class="bg-white p-5 rounded-3xl shadow-lg border border-gray-100 flex flex-col items-center gap-4">
+                <canvas id="twibbonCanvas" class="rounded-xl shadow-inner"></canvas>
+                <p class="text-sm text-gray-500 italic">Geser foto Anda untuk menyesuaikan posisi.</p>
+            </div>
+
+            <div class="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 space-y-8">
+                <div>
+                    <h1 class="text-2xl font-bold text-sr-green-dark">Twibbon Idul Fitri</h1>
+                    <p class="text-gray-600">Selamat Hari Raya <br> Idul Fitri 1447H PO. Sutan Raya</p>
+                </div>
+
+                <div class="space-y-3">
+                    <label class="block text-sm font-semibold text-gray-700">Langkah 1: Upload Foto Anda</label>
+                    <div id="dropZone" class="border-2 border-dashed border-gray-200 rounded-2xl p-6 text-center hover:border-sr-green-mid hover:bg-green-50 transition cursor-pointer">
+                        <input type="file" id="fileInput" accept="image/png, image/jpeg" class="hidden">
+                        <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                            <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <p class="mt-2 text-sm text-gray-600">Klik untuk upload atau drag-and-drop</p>
+                        <p class="text-xs text-gray-500">PNG atau JPG</p>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <label for="zoomRange" class="flex items-center justify-between text-sm font-semibold text-gray-700">
+                        <span>Langkah 2: Perbesar / Perkecil Foto</span>
+                        <span id="zoomValue" class="text-xs font-mono text-sr-green-mid">100%</span>
+                    </label>
+                    <input type="range" id="zoomRange" min="10" max="200" value="100" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-sr-gold">
+                </div>
+
+                <div class="pt-6 border-t border-gray-100">
+                    <button id="downloadBtn" class="w-full flex items-center justify-center gap-3 bg-sr-green-dark hover:bg-sr-green-mid text-white font-semibold py-4 px-6 rounded-2xl transition shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Unduh Twibbon
+                    </button>
+                    <p class="text-xs text-center text-gray-500 mt-3">File akan diunduh sebagai PNG berkualitas tinggi.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-white border-t border-gray-100 mt-16 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3">
+            <p class="text-lg font-semibold text-sr-green-dark">SutanRaya.com</p>
+            <p class="text-sm text-gray-500">&copy; 2026 SutanRaya.com. Seluruh hak cipta dilindungi.</p>
+            <div class="flex items-center justify-center gap-6 text-xs text-gray-400">
+                <a href="#" class="hover:text-sr-green-mid transition">Syarat & Ketentuan</a>
+                <a href="#" class="hover:text-sr-green-mid transition">Kebijakan Privasi</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- KONFIGURASI ---
+        // Ganti URL ini dengan URL Twibbon PNG transparan Anda yang asli.
+        const TWIBBON_URL = 'Twibbon.png'; 
+
+        // --- INISIALISASI ---
+        const canvas = document.getElementById('twibbonCanvas');
+        const ctx = canvas.getContext('2d');
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const zoomRange = document.getElementById('zoomRange');
+        const zoomValue = document.getElementById('zoomValue');
+        const downloadBtn = document.getElementById('downloadBtn');
+
+        let userImage = new Image();
+        let twibbonImage = new Image();
+        let isImageLoaded = false;
+        
+        // Variabel untuk posisi dan skala foto user
+        let imgX = 0, imgY = 0, imgScale = 1;
+        
+        // Variabel untuk dragging
+        let isDragging = false;
+        let startX, startY;
+
+        // --- MUAT TWIBBON FRAME (Dinamis Aspek Rasio) ---
+        twibbonImage.src = TWIBBON_URL;
+        twibbonImage.crossOrigin = "Anonymous"; 
+        twibbonImage.onload = () => {
+            // Set dimensi internal canvas sesuai dengan ukuran asli PNG Twibbon
+            canvas.width = twibbonImage.naturalWidth;
+            canvas.height = twibbonImage.naturalHeight;
+            
+            // Set aspect ratio di CSS agar UI menyesuaikan dengan dimensi asli gambar
+            canvas.style.aspectRatio = `${canvas.width} / ${canvas.height}`;
+
+            // Gambar twibbon kosong dulu sebagai placeholder
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(twibbonImage, 0, 0, canvas.width, canvas.height);
+        };
+        twibbonImage.onerror = () => {
+            alert('Gagal memuat frame twibbon. Pastikan URL benar dan mendukung CORS.');
+        };
+
+        // --- LOGIKA UTAMA: MENGGAMBAR KE CANVAS ---
+        function drawCanvas() {
+            // 1. Bersihkan canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (isImageLoaded) {
+                // 2. Gambar Foto User (Layer Bawah)
+                ctx.save();
+                
+                // Gambar foto dengan transformasi (geser dan skala)
+                // Kita menggambar dari tengah agar zoom terasa natural
+                ctx.translate(canvas.width / 2 + imgX, canvas.height / 2 + imgY);
+                ctx.scale(imgScale, imgScale);
+                ctx.drawImage(userImage, -userImage.width / 2, -userImage.height / 2);
+                
+                ctx.restore();
+            }
+
+            // 3. Gambar Frame Twibbon (Layer Atas)
+            ctx.drawImage(twibbonImage, 0, 0, canvas.width, canvas.height);
+        }
+
+        // --- LOGIKA UPLOAD FOTO ---
+        function handleFile(file) {
+            if (!file || !file.type.startsWith('image/')) return;
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                userImage.onload = () => {
+                    isImageLoaded = true;
+                    // Reset posisi dan skala awal
+                    imgX = 0; imgY = 0;
+                    
+                    // Skala awal agar foto menutupi canvas (cover effect), menyesuaikan ukuran canvas yang baru
+                    const scaleX = canvas.width / userImage.width;
+                    const scaleY = canvas.height / userImage.height;
+                    imgScale = Math.max(scaleX, scaleY);
+                    
+                    // Setel slider zoom ke nilai awal yang sesuai
+                    zoomRange.value = imgScale * 100;
+                    zoomValue.textContent = Math.round(imgScale * 100) + '%';
+                    
+                    downloadBtn.disabled = false; // Aktifkan tombol download
+                    drawCanvas();
+                };
+                userImage.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Event Listeners untuk Input File dan Drag & Drop
+        dropZone.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', (e) => handleFile(e.target.files[0]));
+        
+        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('border-sr-green-mid', 'bg-green-50'); });
+        dropZone.addEventListener('dragleave', () => { dropZone.classList.remove('border-sr-green-mid', 'bg-green-50'); });
+        dropZone.addEventListener('drop', (e) => { e.preventDefault(); dropZone.classList.remove('border-sr-green-mid', 'bg-green-50'); handleFile(e.dataTransfer.files[0]); });
+
+        // --- LOGIKA ZOOM ---
+        zoomRange.addEventListener('input', () => {
+            imgScale = zoomRange.value / 100;
+            zoomValue.textContent = Math.round(zoomRange.value) + '%';
+            if (isImageLoaded) drawCanvas();
+        });
+
+        // --- LOGIKA GESER (DRAG) FOTO ---
+        function getEventPos(e) {
+            // Menangani mouse dan touch events
+            const rect = canvas.getBoundingClientRect();
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            // Konversi posisi layar ke posisi internal canvas yang dinamis
+            return {
+                x: (clientX - rect.left) * (canvas.width / rect.width),
+                y: (clientY - rect.top) * (canvas.height / rect.height)
+            };
+        }
+
+        function startDragging(e) {
+            if (!isImageLoaded) return;
+            isDragging = true;
+            const pos = getEventPos(e);
+            startX = pos.x - imgX;
+            startY = pos.y - imgY;
+        }
+
+        function dragImage(e) {
+            if (!isDragging || !isImageLoaded) return;
+            e.preventDefault(); // Mencegah scrolling di mobile
+            const pos = getEventPos(e);
+            imgX = pos.x - startX;
+            imgY = pos.y - startY;
+            drawCanvas();
+        }
+
+        function stopDragging() { isDragging = false; }
+
+        // Mouse Events
+        canvas.addEventListener('mousedown', startDragging);
+        window.addEventListener('mousemove', dragImage);
+        window.addEventListener('mouseup', stopDragging);
+        
+        // Touch Events (untuk mobile)
+        canvas.addEventListener('touchstart', startDragging);
+        window.addEventListener('touchmove', dragImage, { passive: false });
+        window.addEventListener('touchend', stopDragging);
+
+        // --- LOGIKA DOWNLOAD ---
+        downloadBtn.addEventListener('click', () => {
+            if (!isImageLoaded) return;
+            
+            // Buat link unduhan sementara
+            const link = document.createElement('a');
+            link.download = 'Twibbon-Lebaran-SutanRaya.png';
+            link.href = canvas.toDataURL('image/png', 1.0); // Kualitas maksimum
+            link.click();
+        });
+
+    </script>
+</body>
+</html>
