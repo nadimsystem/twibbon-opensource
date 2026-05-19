@@ -1,0 +1,40 @@
+name: Vue.js CI Pipeline
+
+# Kontrol kapan workflow ini akan berjalan
+on:
+  push:
+    branches: [ "main" ] # Berjalan otomatis saat kamu push ke branch main
+  pull_request:
+    branches: [ "main" ] # Berjalan otomatis saat ada Pull Request ke branch main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest # Menggunakan server virtual Linux milik GitHub
+
+    steps:
+    # Langkah 1: Ambil kode terbaru dari repository GitHub kamu
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # Langkah 2: Install Node.js di server GitHub
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 25 # Sesuaikan dengan versi Node.js di laptop kamu (misal: 18 atau 20)
+        cache: 'npm'     # Mengaktifkan cache biar install library selanjutnya lebih cepat
+
+    # Langkah 3: Install semua library/dependencies Vue.js kamu
+    - name: Install dependencies
+      run: npm ci
+
+    # Langkah 4: Cek kerapian kode (Opsional, jalankan jika project Vue kamu pakai ESLint)
+    - name: Run Lint
+      run: npm run lint --if-present
+
+    # Langkah 5: Jalankan unit test (Opsional, jika kamu pakai Vitest/Jest)
+    - name: Run Tests
+      run: npm run test:unit --if-present
+
+    # Langkah 6: Mencoba melakukan kompilasi / build project Vue.js
+    - name: Build project
+      run: npm run build
