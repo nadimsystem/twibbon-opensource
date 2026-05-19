@@ -2,12 +2,12 @@ const { createApp, ref, onMounted, onBeforeUnmount } = Vue;
 
         createApp({
             setup() {
-                // DOM refs
+
                 const canvas = ref(null);
                 const dropZone = ref(null);
                 const fileInput = ref(null);
 
-                // Reactive state
+
                 const isImageLoaded = ref(false);
                 const imgX = ref(0);
                 const imgY = ref(0);
@@ -15,19 +15,19 @@ const { createApp, ref, onMounted, onBeforeUnmount } = Vue;
                 const imgScalePercent = ref(100);
                 const zoomDisplay = ref('100');
                 
-                // Drag state
+
                 const isDragging = ref(false);
                 const dragStart = ref({ x: 0, y: 0 });
 
-                // Images
+
                 let userImage = null;
                 let twibbonImage = null;
                 let ctx = null;
 
-                // Config
+
                 const TWIBBON_URL = 'Twibbon.png';
 
-                // --- Canvas Drawing ---
+
                 const drawCanvas = () => {
                     if (!ctx || !canvas.value) return;
                     
@@ -46,14 +46,14 @@ const { createApp, ref, onMounted, onBeforeUnmount } = Vue;
                     }
                 };
 
-                // --- Zoom Handler ---
+
                 const onZoomChange = () => {
                     imgScale.value = imgScalePercent.value / 100;
                     zoomDisplay.value = Math.round(imgScalePercent.value);
                     drawCanvas();
                 };
 
-                // --- File Handling ---
+
                 const handleFile = (file) => {
                     if (!file || !file.type.startsWith('image/')) return;
                     
@@ -65,7 +65,7 @@ const { createApp, ref, onMounted, onBeforeUnmount } = Vue;
                             imgX.value = 0;
                             imgY.value = 0;
                             
-                            // Cover effect scaling
+
                             const scaleX = canvas.value.width / userImage.width;
                             const scaleY = canvas.value.height / userImage.height;
                             imgScale.value = Math.max(scaleX, scaleY);
@@ -95,7 +95,7 @@ const { createApp, ref, onMounted, onBeforeUnmount } = Vue;
                     if (file) handleFile(file);
                 };
 
-                // --- Drag Logic ---
+
                 const getEventPos = (e) => {
                     const rect = canvas.value.getBoundingClientRect();
                     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -124,7 +124,7 @@ const { createApp, ref, onMounted, onBeforeUnmount } = Vue;
 
                 const stopDragging = () => { isDragging.value = false; };
 
-                // --- Download ---
+
                 const downloadTwibbon = () => {
                     if (!isImageLoaded.value || !canvas.value) return;
                     const link = document.createElement('a');
@@ -133,12 +133,12 @@ const { createApp, ref, onMounted, onBeforeUnmount } = Vue;
                     link.click();
                 };
 
-                // --- Lifecycle ---
+
                 onMounted(() => {
                     ctx = canvas.value?.getContext('2d');
                     if (!ctx) return;
 
-                    // Load twibbon frame
+
                     twibbonImage = new Image();
                     twibbonImage.crossOrigin = 'Anonymous';
                     twibbonImage.onload = () => {
@@ -150,7 +150,7 @@ const { createApp, ref, onMounted, onBeforeUnmount } = Vue;
                     twibbonImage.onerror = () => alert('Gagal memuat frame twibbon. Pastikan URL benar dan mendukung CORS.');
                     twibbonImage.src = TWIBBON_URL;
 
-                    // Event listeners for drag
+
                     canvas.value?.addEventListener('mousedown', startDragging);
                     canvas.value?.addEventListener('touchstart', startDragging, { passive: true });
                     window.addEventListener('mousemove', dragImage);
@@ -160,7 +160,7 @@ const { createApp, ref, onMounted, onBeforeUnmount } = Vue;
                 });
 
                 onBeforeUnmount(() => {
-                    // Cleanup listeners
+
                     canvas.value?.removeEventListener('mousedown', startDragging);
                     canvas.value?.removeEventListener('touchstart', startDragging);
                     window.removeEventListener('mousemove', dragImage);
